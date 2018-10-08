@@ -1,0 +1,9 @@
+{
+  "keycloakUrl": "https://auth.testing.opengov.zone",
+  "clientId": "data-apps",
+  "clientSecret": "example-client-secret",
+  "username": "example_username",
+  "password": "example_user_password",
+  "delphiusUrl": "https://controlpanel.ogbeta.us/api/v1/users",
+  "delphiusToken": "example-delphius-token"
+} 
