@@ -46,14 +46,15 @@ def main():
         print("The response contains {0} properties".format(len(jData)))
         print("\n")
         for key in jData:
+            #print "checking " + key['username']
             for delphUrl in getDelphUrl(key):
                 #print delphUrl + "\n\t" + "Token token=%s" % conf['delphiusToken']
                 delphiusResponse = requests.get(delphUrl, headers={"Authorization": "Token token=%s" % conf['delphiusToken']})
-
+                dData = {}
                 if (delphiusResponse.ok):
                     dData = json.loads(delphiusResponse.content)
     
-                    if ('users' in dData):
+                    if ('users' in dData and len(dData['users']) > 0):
                         dData = dData['users'][0]
 
                     if ('uuid' in dData):
@@ -61,7 +62,6 @@ def main():
                             print "mismatch for " + key['username'] + ": " + key['id'] + " != " + dData['uuid']
                     else: 
                         print "FAILED to lookup " + key['username']
-                        json.dumps(dData)
     else:
       # If response code is not ok (200), print the resulting http error code with description
         authResponse.raise_for_status()
@@ -73,8 +73,8 @@ def getDelphUrl(jsonBody) :
         return [conf['delphiusUrl'] + "/" + str(jsonBody['attributes']['delphius_id'][0])]
     else: 
         if ('email' in jsonBody):
-            #print key['id'] + ":" + key['username'] + ":" + key['email']
-            return [conf['delphiusUrl'] + "?" + jsonBody['email']]
+            #print "\tfalling back to email lookup for " + jsonBody['id'] + ":" + jsonBody['username'] + ":" + jsonBody['email']
+            return [conf['delphiusUrl'] + "?email=" + jsonBody['email']]
         else:
             print "MISSING delphius info to lookup " + jsonBody['username'] + ":" + jsonBody['id']
             return []
