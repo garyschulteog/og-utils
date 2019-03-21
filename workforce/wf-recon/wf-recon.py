@@ -55,12 +55,12 @@ def checkWorkforce(workforce):
 
   for ce in data:
       if ce['configuration']['effectiveEndDate'] and dateParse(ce['configuration']['effectiveEndDate']) < dateParse(workforce['configuration']['fiscalYearEndDate']):
-          sys.stderr.write("\tERROR: cost element FY end date mismatch for workforce {} ce: {}\n".format(workforce['_id'], ce['_id']))
-          ret.append("FY end {} is after CE end {}".format(workforce['configuration']['fiscalYearEndDate'], ce['configuration']['effectiveEndDate']))
+          sys.stderr.write("\tERROR: cost element FY end date mismatch for workforce {} ce: {}({})\n".format(workforce['_id'], ce['configuration']['name'], ce['_id']))
+          ret.append("Cost element {}({}) FY end {} is after CE end {}".format(ce['configuration']['name'], ce['_id'], workforce['configuration']['fiscalYearEndDate'], ce['configuration']['effectiveEndDate']))
 
       if ce['configuration']['effectiveStartDate'] and dateParse(ce['configuration']['effectiveStartDate']) > dateParse(workforce['configuration']['fiscalYearStartDate']):
-          sys.stderr.write("\tERROR: cost element FY end date mismatch for workforce {} ce: {}\n".format(workforce['_id'], ce['_id']))
-          ret.append("FY start {} is before CE start {}".format(workforce['configuration']['fiscalYearStartDate'], ce['configuration']['effectiveStartDate']))
+          sys.stderr.write("\tERROR: cost element FY end date mismatch for workforce {} ce: {}({})\n".format(workforce['_id'], ce['configuration']['name'], ce['_id']))
+          ret.append("Cost element {}({}) FY start {} is before CE start {}".format(ce['configuration']['name'], ce['_id'], workforce['configuration']['fiscalYearStartDate'], ce['configuration']['effectiveStartDate']))
   return ret
 
 
