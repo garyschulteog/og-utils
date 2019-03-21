@@ -1,2 +1,3 @@
 keycloak/test.json
 keycloak/prod.json
+*/.DS_Store
