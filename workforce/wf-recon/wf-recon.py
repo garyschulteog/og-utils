@@ -79,12 +79,11 @@ def main(argv):
 
   with open(file) as json_file:
     entityList = json.load(json_file)
-    #print(getEntityDefs(entityList, token))
     entities = getEntityDefs(entityList, token)
     for entity in entities:
       workforces = getWorkforces(entities[entity])  
       for workforce in workforces:
-        reportOn(entity, workforces[workforce], checkWorkforce(workforces[workforce]))
+        reportOn(entities[entity], workforces[workforce], checkWorkforce(workforces[workforce]))
 
 
 
