@@ -64,9 +64,9 @@ def checkWorkforce(workforce):
   return ret
 
 
-def reportOn(entity, workforces, mismatches):
+def reportOn(entity, workforce, mismatches):
   if len(mismatches) > 0: 
-    print "entity {}({}) workforce {}({})"
+    print "entity {}({}) workforce {}({})".format(entity['id'], entity['name'], workforce['_id'], workforce['configuration']['name'])
     for mismatch in mismatches:
        print "\t{}".format(mismatch)  
 
